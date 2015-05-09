@@ -11,10 +11,18 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemOpen">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Open"/>
+                <Property name="text" type="java.lang.String" value="Open..."/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemOpenActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAdd">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Add..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAddActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -27,6 +35,11 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAboutProgram">
               <Properties>
                 <Property name="text" type="java.lang.String" value="About Program"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAuthor">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="About Author"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -82,7 +95,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="190" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="58" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="77" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="quitButton" alignment="3" min="-2" max="-2" attributes="0"/>

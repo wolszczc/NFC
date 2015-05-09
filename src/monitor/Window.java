@@ -5,9 +5,13 @@
  */
 package monitor;
 
+import static container.Reader.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 /**
@@ -22,7 +26,7 @@ public class Window extends javax.swing.JFrame {
     public Window() {
         initComponents();
         setTitle("NFC");
-        
+
     }
 
     /**
@@ -45,8 +49,10 @@ public class Window extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
+        jMenuItemAdd = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItemAboutProgram = new javax.swing.JMenuItem();
+        jMenuItemAuthor = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,7 +77,7 @@ public class Window extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        jMenuItemOpen.setText("Open");
+        jMenuItemOpen.setText("Open...");
         jMenuItemOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemOpenActionPerformed(evt);
@@ -79,12 +85,23 @@ public class Window extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemOpen);
 
+        jMenuItemAdd.setText("Add...");
+        jMenuItemAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAddActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemAdd);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Help");
 
         jMenuItemAboutProgram.setText("About Program");
         jMenu2.add(jMenuItemAboutProgram);
+
+        jMenuItemAuthor.setText("About Author");
+        jMenu2.add(jMenuItemAuthor);
 
         jMenuBar1.add(jMenu2);
 
@@ -115,7 +132,7 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(quitButton)
@@ -130,29 +147,48 @@ public class Window extends javax.swing.JFrame {
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
         Object source = evt.getSource();
-        if(source == quitButton){
+        if (source == quitButton) {
             dispose();
         }
     }//GEN-LAST:event_quitButtonActionPerformed
 
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
         Object source = evt.getSource();
-        if(source == jMenuItemOpen){
+        if (source == jMenuItemOpen) {
             JFileChooser fileChoicer = new JFileChooser();
-            if(fileChoicer.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+            if (fileChoicer.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 File file = fileChoicer.getSelectedFile();
-                try{
+              
+                try {
+                    createNewBase("Base", file);
+                } catch (IOException ex) {
+                    Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                
+            }
+        }
+    }//GEN-LAST:event_jMenuItemOpenActionPerformed
+
+    private void jMenuItemAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddActionPerformed
+        Object source = evt.getSource();
+        if (source == jMenuItemOpen) {
+            JFileChooser fileChoicer = new JFileChooser();
+            if (fileChoicer.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                File file = fileChoicer.getSelectedFile();
+                try {
                     Scanner scanner = new Scanner(file);
-                    while(scanner.hasNext()){
-                        /*dodaj do bazy*/
+                    while (scanner.hasNext()) {
+
+     //createNewBase(file);
                     }
-                    
-                }catch(FileNotFoundException fnfe){
+
+                } catch (FileNotFoundException fnfe) {
                     fnfe.getStackTrace();
                 }
             }
         }
-    }//GEN-LAST:event_jMenuItemOpenActionPerformed
+    }//GEN-LAST:event_jMenuItemAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,7 +226,7 @@ public class Window extends javax.swing.JFrame {
         Window window = new Window();
         window.setDefaultCloseOperation(EXIT_ON_CLOSE);
         window.setVisible(true);
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -198,6 +234,8 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemAboutProgram;
+    private javax.swing.JMenuItem jMenuItemAdd;
+    private javax.swing.JMenuItem jMenuItemAuthor;
     private javax.swing.JMenuItem jMenuItemOpen;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

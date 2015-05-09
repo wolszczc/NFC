@@ -11,4 +11,9 @@ package container;
  */
 public class Container {
     
+    private String word; /*przeczytane słowo*/
+    private int index; /*numer słowa*/
+    private int counts; /* zliczenia wybranego słowa w tekście*/
+   
 }
+
