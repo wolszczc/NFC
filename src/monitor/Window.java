@@ -7,12 +7,11 @@ package monitor;
 
 import static container.Reader.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import static container.WriteData.*;
 
 /**
  *
@@ -158,36 +157,32 @@ public class Window extends javax.swing.JFrame {
             JFileChooser fileChoicer = new JFileChooser();
             if (fileChoicer.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 File file = fileChoicer.getSelectedFile();
-              
+                String tmp;
+                tmp = createNewBase(file.getAbsolutePath());
                 try {
-                    createNewBase("Base", file);
+                    saveFileToBase("base/Base", file, tmp);
                 } catch (IOException ex) {
                     Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-                
             }
         }
     }//GEN-LAST:event_jMenuItemOpenActionPerformed
 
     private void jMenuItemAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddActionPerformed
         Object source = evt.getSource();
-        if (source == jMenuItemOpen) {
+        if (source == jMenuItemAdd) {
             JFileChooser fileChoicer = new JFileChooser();
             if (fileChoicer.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 File file = fileChoicer.getSelectedFile();
+                String tmp;
+                tmp = createNewBase(file.getAbsolutePath());
                 try {
-                    Scanner scanner = new Scanner(file);
-                    while (scanner.hasNext()) {
-
-     //createNewBase(file);
-                    }
-
-                } catch (FileNotFoundException fnfe) {
-                    fnfe.getStackTrace();
+                    addTextToFile("base/Base", file, tmp);
+                } catch (IOException ex) {
+                    Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }
+        }        
     }//GEN-LAST:event_jMenuItemAddActionPerformed
 
     /**
