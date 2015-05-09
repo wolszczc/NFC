@@ -5,6 +5,11 @@
  */
 package monitor;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author wolszczc
@@ -33,26 +38,57 @@ public class Window extends javax.swing.JFrame {
         quitButton = new javax.swing.JButton();
         statsButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaIn = new javax.swing.JTextArea();
         settingsButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        jTextPaneOut = new javax.swing.JTextPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemOpen = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItemAboutProgram = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         sendButton.setText("Send");
 
         quitButton.setText("Quit");
+        quitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitButtonActionPerformed(evt);
+            }
+        });
 
         statsButton.setText("Stats");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextAreaIn.setColumns(20);
+        jTextAreaIn.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaIn);
 
         settingsButton.setText("Settings");
 
-        jScrollPane2.setViewportView(jTextPane1);
+        jScrollPane2.setViewportView(jTextPaneOut);
+
+        jMenu1.setText("File");
+
+        jMenuItemOpen.setText("Open");
+        jMenuItemOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemOpenActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemOpen);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Help");
+
+        jMenuItemAboutProgram.setText("About Program");
+        jMenu2.add(jMenuItemAboutProgram);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,7 +115,7 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(quitButton)
@@ -91,6 +127,32 @@ public class Window extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
+        Object source = evt.getSource();
+        if(source == quitButton){
+            dispose();
+        }
+    }//GEN-LAST:event_quitButtonActionPerformed
+
+    private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
+        Object source = evt.getSource();
+        if(source == jMenuItemOpen){
+            JFileChooser fileChoicer = new JFileChooser();
+            if(fileChoicer.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+                File file = fileChoicer.getSelectedFile();
+                try{
+                    Scanner scanner = new Scanner(file);
+                    while(scanner.hasNext()){
+                        /*dodaj do bazy*/
+                    }
+                    
+                }catch(FileNotFoundException fnfe){
+                    fnfe.getStackTrace();
+                }
+            }
+        }
+    }//GEN-LAST:event_jMenuItemOpenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,10 +194,15 @@ public class Window extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAboutProgram;
+    private javax.swing.JMenuItem jMenuItemOpen;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextArea jTextAreaIn;
+    private javax.swing.JTextPane jTextPaneOut;
     private javax.swing.JButton quitButton;
     private javax.swing.JButton sendButton;
     private javax.swing.JButton settingsButton;
