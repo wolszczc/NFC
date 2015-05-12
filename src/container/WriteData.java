@@ -16,10 +16,10 @@ import java.io.IOException;
  */
 public class WriteData {
 
-    public static void saveFileToBase(String fileName, File file, String words) throws IOException {
+    public static void saveFileToBase(String path, File file, String words, String fileName) throws IOException {
         try {
-
-            file = new File(fileName);
+            boolean createFile = (new File(fileName)).mkdir();
+            file = new File(path);
 
             if (!file.exists()) {
                 file.createNewFile();
@@ -35,8 +35,9 @@ public class WriteData {
         }
     }
 
-    public static void addTextToFile(String path, File file, String words) throws IOException {
+    public static void addTextToBase(String path, File file, String words, String fileName) throws IOException {
         try {
+            boolean createFile = (new File(fileName)).mkdir();
             file = new File(path);
 
             if (!file.exists()) {

@@ -35,9 +35,8 @@ public class Reader {
         return sb.toString();
     }
 
-    public static void createWords(Container[] con, String nameFile) {
+    public static Container[] createWords(Container[] con, String nameFile) {
         int tabSize = 10;
-        int a = 0;
         int i = 0;
         con = new Container[tabSize];
         String dane;
@@ -52,24 +51,27 @@ public class Reader {
 
         try {
             while ((dane = scanner.next()) != null) {
-                /*to miejsce do poprawy*/
-                if (tabSize < i) {
+                if (tabSize <= i) {
+                    Container[] con2 = new Container[tabSize];
+                    con2 = con.clone();
                     tabSize *= 2;
-                    System.arraycopy(con, 0, con, 0, tabSize);
+                    con = new Container[tabSize];
+                    System.arraycopy(con2, 0, con, 0, tabSize / 2);
                 }
+                con[i] = new Container();
                 con[i].setWord(dane);
-                con[i].setCounts(dane.length());
-                con[i].setIndex(i);
+                con[i].setIndex(1);
                 i++;
-                /*to miejsce do poprawy*/
 
-                System.out.println(dane);
+                System.out.println(con[i - 1].getWord() + "  " + con[i - 1].getCounts());
             }
         } catch (NullPointerException npe) {
-            System.err.println("File: " + file + " = null pointer");
+            System.err.println("Error: file: " + file + " = null pointer");
         } catch (NoSuchElementException nsee) {
 
         }
+        return con;
+        
     }
 
 }

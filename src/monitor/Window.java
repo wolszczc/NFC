@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import static container.WriteData.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -100,6 +101,11 @@ public class Window extends javax.swing.JFrame {
         jMenu2.add(jMenuItemAboutProgram);
 
         jMenuItemAuthor.setText("About Author");
+        jMenuItemAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAuthorActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemAuthor);
 
         jMenuBar1.add(jMenu2);
@@ -129,10 +135,10 @@ public class Window extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(quitButton)
                     .addComponent(sendButton)
@@ -160,7 +166,7 @@ public class Window extends javax.swing.JFrame {
                 String tmp;
                 tmp = createNewBase(file.getAbsolutePath());
                 try {
-                    saveFileToBase("base/Base", file, tmp);
+                    saveFileToBase("base/Base", file, tmp, "base");
                 } catch (IOException ex) {
                     Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -177,13 +183,17 @@ public class Window extends javax.swing.JFrame {
                 String tmp;
                 tmp = createNewBase(file.getAbsolutePath());
                 try {
-                    addTextToFile("base/Base", file, tmp);
+                    addTextToBase("base/Base", file, tmp, "base");
                 } catch (IOException ex) {
                     Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }        
+        }
     }//GEN-LAST:event_jMenuItemAddActionPerformed
+
+    private void jMenuItemAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAuthorActionPerformed
+        JOptionPane.showMessageDialog(rootPane, "Cezary Wolszczak \nElektryczny\nInformatyka 2014/2015", "About the Autor", WIDTH);
+    }//GEN-LAST:event_jMenuItemAuthorActionPerformed
 
     /**
      * @param args the command line arguments

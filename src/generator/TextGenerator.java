@@ -10,5 +10,18 @@ package generator;
  * @author wolszczc
  */
 public class TextGenerator {
+    private String[] prefiks;
+    private String sufiks;
+    private int index;
+    private int prefiksCounts;
+    private int sufiksCounts;
     
+    public TextGenerator(){
+        prefiks = new String[0];
+        prefiks[0] = "";
+        sufiks = "";
+        index = 0;
+        prefiksCounts = 0;
+        sufiksCounts = 0;
+    }
 }

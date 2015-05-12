@@ -14,17 +14,27 @@ public class Container {
     private String word; /*przeczytane słowo*/
     private int index; /*numer słowa*/
     private int counts; /* zliczenia wybranego słowa w tekście*/
+    
+    public Container(){
+        this("",0,0);
+    }
+    
+    public Container(String s, int i, int c){
+        word = s;
+        index = i;
+        counts = c;
+    }
    
     public void setWord(String word){
-        word = this.word;
+        this.word = word;
     }
     
     public void setIndex(int index){
-        index = this.index;
+        this.index = index;
     }
     
     public void setCounts(int counts){
-        counts = this.counts;
+        this.counts = counts;
     }
     
     public String getWord(){
