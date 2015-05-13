@@ -5,23 +5,40 @@
  */
 package generator;
 
+import container.Container;
+
 /**
  *
- * @author wolszczc
+ * @author cezary
  */
 public class TextGenerator {
-    private String[] prefiks;
-    private String sufiks;
-    private int index;
-    private int prefiksCounts;
-    private int sufiksCounts;
-    
-    public TextGenerator(){
-        prefiks = new String[0];
-        prefiks[0] = "";
-        sufiks = "";
-        index = 0;
-        prefiksCounts = 0;
-        sufiksCounts = 0;
+        public static NGramContainer[] createN_gram(NGramContainer[] n_gram, Container[] con, int rankOfN_gram) {
+        int tabSize = 10;
+        int i = 0;
+        n_gram = new NGramContainer[tabSize];
+        try {
+            while (con[i + rankOfN_gram].getWord() != null) {
+                if (tabSize <= i) {
+                    NGramContainer[] n_gram2 = new NGramContainer[tabSize];
+                    n_gram2 = n_gram.clone();
+                    tabSize *= 2;
+                    n_gram = new NGramContainer[tabSize];
+                    System.arraycopy(n_gram2, 0, n_gram, 0, tabSize / 2);
+                }
+                n_gram[i] = new NGramContainer(rankOfN_gram);
+                for (int j = 0; j < rankOfN_gram; j++) {
+                    n_gram[i].setPrefiks(con[i + j].getWord(), j);
+                }
+                n_gram[i].setSufiks(con[i + rankOfN_gram].getWord());
+                n_gram[i].setIndex(i);
+                //System.out.println(n_gram[i].getSufiks());
+                i++;
+
+            }
+        } catch (NullPointerException npe) {
+            /*czyta o jeden za dużo stąd ten null*/
+        }
+
+        return n_gram;
     }
 }

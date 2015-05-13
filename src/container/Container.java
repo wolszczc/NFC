@@ -16,7 +16,7 @@ public class Container {
     private int counts; /* zliczenia wybranego słowa w tekście*/
     
     public Container(){
-        this("",0,0);
+        this(null,0,0);
     }
     
     public Container(String s, int i, int c){

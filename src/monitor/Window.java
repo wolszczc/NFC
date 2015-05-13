@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import static container.WriteData.*;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,8 @@ import javax.swing.JOptionPane;
  * @author wolszczc
  */
 public class Window extends javax.swing.JFrame {
+
+    private static String wordsIn = "";
 
     /**
      * Creates new form Window
@@ -57,6 +60,11 @@ public class Window extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         sendButton.setText("Send");
+        sendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendButtonActionPerformed(evt);
+            }
+        });
 
         quitButton.setText("Quit");
         quitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +106,11 @@ public class Window extends javax.swing.JFrame {
         jMenu2.setText("Help");
 
         jMenuItemAboutProgram.setText("About Program");
+        jMenuItemAboutProgram.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAboutProgramActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemAboutProgram);
 
         jMenuItemAuthor.setText("About Author");
@@ -152,7 +165,8 @@ public class Window extends javax.swing.JFrame {
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
         Object source = evt.getSource();
-        if (source == quitButton) {
+        int ask = JOptionPane.showConfirmDialog(this, "Are you want to quit?", "Quit", JOptionPane.YES_NO_OPTION);
+        if (ask == JOptionPane.YES_OPTION) {
             dispose();
         }
     }//GEN-LAST:event_quitButtonActionPerformed
@@ -164,7 +178,7 @@ public class Window extends javax.swing.JFrame {
             if (fileChoicer.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 File file = fileChoicer.getSelectedFile();
                 String tmp;
-                tmp = createNewBase(file.getAbsolutePath());
+                tmp = readFile(file.getAbsolutePath());
                 try {
                     saveFileToBase("base/Base", file, tmp, "base");
                 } catch (IOException ex) {
@@ -181,9 +195,9 @@ public class Window extends javax.swing.JFrame {
             if (fileChoicer.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 File file = fileChoicer.getSelectedFile();
                 String tmp;
-                tmp = createNewBase(file.getAbsolutePath());
+                tmp = readFile(file.getAbsolutePath());
                 try {
-                    addTextToBase("base/Base", file, tmp, "base");
+                    addFileToBase("base/Base", file, tmp, "base");
                 } catch (IOException ex) {
                     Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -194,6 +208,24 @@ public class Window extends javax.swing.JFrame {
     private void jMenuItemAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAuthorActionPerformed
         JOptionPane.showMessageDialog(rootPane, "Cezary Wolszczak \nElektryczny\nInformatyka 2014/2015", "About the Autor", WIDTH);
     }//GEN-LAST:event_jMenuItemAuthorActionPerformed
+
+    private void jMenuItemAboutProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutProgramActionPerformed
+        JOptionPane.showMessageDialog(rootPane, "Jeszcze to dopracuje, wersja wczesna beta:P", "About the Program", WIDTH);
+    }//GEN-LAST:event_jMenuItemAboutProgramActionPerformed
+
+    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
+        Object source = evt.getSource();
+        if (source == sendButton) {
+            String tempWords;
+            Date date = new Date();
+            tempWords = " " + jTextAreaIn.getText();
+            addTextToBase("base/Base", null, "base", tempWords);
+            wordsIn = wordsIn + "\n" + "user:\n" + date + "\n" + jTextAreaIn.getText() + "\n";
+            jTextPaneOut.setText(wordsIn);
+            jTextAreaIn.setText("");
+            System.out.println(wordsIn);
+        }
+    }//GEN-LAST:event_sendButtonActionPerformed
 
     /**
      * @param args the command line arguments

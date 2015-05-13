@@ -19,7 +19,7 @@ import java.util.Scanner;
  */
 public class Reader {
 
-    public static String createNewBase(String fileName) {
+    public static String readFile(String fileName) { /*czyta z pliku*/
         StringBuilder sb = new StringBuilder();
         String words;
 
@@ -35,7 +35,7 @@ public class Reader {
         return sb.toString();
     }
 
-    public static Container[] createWords(Container[] con, String nameFile) {
+    public static Container[] createWordsArray(Container[] con, String nameFile) {
         int tabSize = 10;
         int i = 0;
         con = new Container[tabSize];
@@ -63,7 +63,7 @@ public class Reader {
                 con[i].setIndex(1);
                 i++;
 
-                System.out.println(con[i - 1].getWord() + "  " + con[i - 1].getCounts());
+//                System.out.println(con[i - 1].getWord() + "  " + con[i - 1].getCounts());
             }
         } catch (NullPointerException npe) {
             System.err.println("Error: file: " + file + " = null pointer");
