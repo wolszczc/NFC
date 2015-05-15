@@ -12,7 +12,7 @@ import container.Container;
  * @author cezary
  */
 public class TextGenerator {
-        public static NGramContainer[] createN_gram(NGramContainer[] n_gram, Container[] con, int rankOfN_gram) {
+        public static NGramContainer[] createNGram(NGramContainer[] n_gram, Container[] con, int rankOfN_gram) {
         int tabSize = 10;
         int i = 0;
         n_gram = new NGramContainer[tabSize];
@@ -31,7 +31,7 @@ public class TextGenerator {
                 }
                 n_gram[i].setSufiks(con[i + rankOfN_gram].getWord());
                 n_gram[i].setIndex(i);
-                //System.out.println(n_gram[i].getSufiks());
+                System.out.println(n_gram[i].getSufiks());
                 i++;
 
             }

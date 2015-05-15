@@ -20,6 +20,8 @@ public class NGramContainer {
     private int prefiksCounts; /*zliczenia prefiksów*/
 
     private int sufiksCounts; /*zliczenia sufiksów*/
+    
+    private int[] pointerOnSufiks;  /*wskażnik na sufiks*/
 
     private double probabilityOfPrefiks; /*prawdopodobieństwo wystąpienia prefiksu*/
 
@@ -34,6 +36,7 @@ public class NGramContainer {
         index = 0;
         prefiksCounts = 0;
         sufiksCounts = 0;
+        pointerOnSufiks = null;
         probabilityOfPrefiks = 0;
         probabilityOfSufiks = 0;
         probabilityOfN_gram = 0;

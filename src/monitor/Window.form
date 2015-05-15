@@ -11,7 +11,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemOpen">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Open..."/>
+                <Property name="text" type="java.lang.String" value="Open file..."/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemOpenActionPerformed"/>
@@ -19,10 +19,26 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAdd">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Add..."/>
+                <Property name="text" type="java.lang.String" value="Add file..."/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAddActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemOpenDictionary">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Open Dictionary..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemOpenDictionaryActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAddDictionary">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Add Dictionary..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAddDictionaryActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -155,6 +171,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Settings"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="settingsButtonActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
