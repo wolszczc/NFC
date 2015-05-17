@@ -34,8 +34,8 @@ public class NGramContainer {
         prefiks = new String[lengthPrefiksArray];
         sufiks = null;
         index = 0;
-        prefiksCounts = 0;
-        sufiksCounts = 0;
+        prefiksCounts = 1;
+        sufiksCounts = 1;
         pointerOnSufiks = null;
         probabilityOfPrefiks = 0;
         probabilityOfSufiks = 0;
@@ -104,6 +104,11 @@ public class NGramContainer {
 
     public void setProbabilityOfN_gram(double probabilityOfN_gram) {
         this.probabilityOfN_gram = probabilityOfN_gram;
+    }
+    
+    @Override
+    public String toString(){
+       return "" + prefiksCounts; 
     }
 
 }

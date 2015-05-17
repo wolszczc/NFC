@@ -12,7 +12,7 @@ import container.Container;
  * @author cezary
  */
 public class TextGenerator {
-        public static NGramContainer[] createNGram(NGramContainer[] n_gram, Container[] con, int rankOfN_gram) {
+        public static NGramContainer[] createNGram(NGramContainer[] n_gram, Container[] con, int rankOfN_gram) {/*tworzy n_gram*/
         int tabSize = 10;
         int i = 0;
         n_gram = new NGramContainer[tabSize];

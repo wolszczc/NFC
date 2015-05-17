@@ -7,18 +7,17 @@ package monitor;
 
 /**
  *
- * @author HP
+ * @author cezary
  */
-public class SettingsWindow extends javax.swing.JFrame {
+public class DictionaryWindow extends javax.swing.JFrame {
 
-    private static int rankOfN_gram = 2;
-
+    private static String newWords = "";
     /**
-     * Creates new form NewJFrame
+     * Creates new form DictionaryWindow
      */
-    public SettingsWindow() {
+    public DictionaryWindow() {
         initComponents();
-        jTextFieldRankOfN_gram.setText("" + rankOfN_gram);
+        jTextAreaDictionary.setText(newWords);
     }
 
     /**
@@ -30,28 +29,28 @@ public class SettingsWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldRankOfN_gram = new javax.swing.JTextField();
-        jButtonOk = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaDictionary = new javax.swing.JTextArea();
         jButtonQuit = new javax.swing.JButton();
+        jButtonRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Rząd n-gramu:");
-
-        jTextFieldRankOfN_gram.setText("2");
-
-        jButtonOk.setText("Ok");
-        jButtonOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOkActionPerformed(evt);
-            }
-        });
+        jTextAreaDictionary.setColumns(20);
+        jTextAreaDictionary.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaDictionary);
 
         jButtonQuit.setText("Quit");
         jButtonQuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonQuitActionPerformed(evt);
+            }
+        });
+
+        jButtonRefresh.setText("Refresh");
+        jButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefreshActionPerformed(evt);
             }
         });
 
@@ -62,28 +61,22 @@ public class SettingsWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldRankOfN_gram, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 205, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonQuit, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonOk, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonRefresh)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldRankOfN_gram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonOk)
-                    .addComponent(jButtonQuit))
+                    .addComponent(jButtonQuit)
+                    .addComponent(jButtonRefresh))
                 .addContainerGap())
         );
 
@@ -97,24 +90,23 @@ public class SettingsWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonQuitActionPerformed
 
-    private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOkActionPerformed
+    private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
         Object source = evt.getSource();
-        if (jButtonOk == source) {
-            String tmp = jTextFieldRankOfN_gram.getText();
-            if (tmp != null) {
-                rankOfN_gram = Integer.parseInt(tmp);
-            }
+        if(jButtonRefresh == source){
+            jTextAreaDictionary.setText(newWords);
         }
-    }//GEN-LAST:event_jButtonOkActionPerformed
+    }//GEN-LAST:event_jButtonRefreshActionPerformed
 
-    public int getRankOfN_gram() {
-        return rankOfN_gram;
+    public static String getNewWords() {
+        return newWords;
     }
 
-    public void setRankOfN_gram(int rankOfN_gram) {
-        this.rankOfN_gram = rankOfN_gram;
+    public static void setNewWords(String newWords) {
+        DictionaryWindow.newWords = newWords;
     }
 
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -132,29 +124,28 @@ public class SettingsWindow extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SettingsWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DictionaryWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SettingsWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DictionaryWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SettingsWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DictionaryWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SettingsWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DictionaryWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SettingsWindow().setVisible(true);
+                new DictionaryWindow().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonOk;
     private javax.swing.JButton jButtonQuit;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextFieldRankOfN_gram;
+    private javax.swing.JButton jButtonRefresh;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextAreaDictionary;
     // End of variables declaration//GEN-END:variables
 }

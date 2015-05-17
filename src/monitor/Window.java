@@ -19,6 +19,10 @@ import generator.TextGenerator;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import static generator.TextGenerator.*;
+import static generator.Tree.addWordsToTree;
+import static generator.Tree.checkWordsInDictionary;
+import java.awt.Font;
+import java.util.TreeSet;
 
 /**
  *
@@ -28,10 +32,14 @@ public class Window extends javax.swing.JFrame {
 
     private static int[] arrayLength = new int[1];
     private static String wordsIn = "";
+    private static String wordsInInfo = "";
+    private static String newWords = "";
     private static Container[] con;
     private static Container[] dictionary;
     private static TextGenerator[] textGen;
     private static NGramContainer[] n_gram;
+    public static TreeSet treeSet = null;
+    public static TreeSet treeDictionary = null;
     private static int rankOfN_gram = 2;
 
     /**
@@ -64,6 +72,8 @@ public class Window extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItemOpen = new javax.swing.JMenuItem();
         jMenuItemAdd = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItemNewWords = new javax.swing.JMenuItem();
         jMenuItemOpenDictionary = new javax.swing.JMenuItem();
         jMenuItemAddDictionary = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -87,6 +97,11 @@ public class Window extends javax.swing.JFrame {
         });
 
         statsButton.setText("Stats");
+        statsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statsButtonActionPerformed(evt);
+            }
+        });
 
         jTextAreaIn.setColumns(20);
         jTextAreaIn.setRows(5);
@@ -119,13 +134,25 @@ public class Window extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemAdd);
 
+        jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Dictionary");
+
+        jMenuItemNewWords.setText("New words");
+        jMenuItemNewWords.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNewWordsActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemNewWords);
+
         jMenuItemOpenDictionary.setText("Open Dictionary...");
         jMenuItemOpenDictionary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemOpenDictionaryActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemOpenDictionary);
+        jMenu3.add(jMenuItemOpenDictionary);
 
         jMenuItemAddDictionary.setText("Add Dictionary...");
         jMenuItemAddDictionary.addActionListener(new java.awt.event.ActionListener() {
@@ -133,9 +160,9 @@ public class Window extends javax.swing.JFrame {
                 jMenuItemAddDictionaryActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemAddDictionary);
+        jMenu3.add(jMenuItemAddDictionary);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Help");
 
@@ -254,9 +281,12 @@ public class Window extends javax.swing.JFrame {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         Object source = evt.getSource();
         if (source == sendButton) {
+            Font font1 = new Font("Verdana", Font.BOLD, 12);
             String tempWords;
             Date date = new Date();
+            jTextPaneOut.setFont(font1);
             tempWords = " " + jTextAreaIn.getText();
+            newWords = newWords + checkWordsInDictionary(treeDictionary, tempWords);
             addTextToBase("base/Base", null, "base", tempWords);
             wordsIn = wordsIn + "\n" + "user:\n" + date + "\n" + jTextAreaIn.getText() + "\n";
             jTextPaneOut.setText(wordsIn);
@@ -280,6 +310,7 @@ public class Window extends javax.swing.JFrame {
             }
             int[] dictionaryLength = new int[1];
             dictionary = createWordsArray(dictionary, "dictionary/Dictionary", dictionaryLength);
+            treeDictionary = addWordsToTree(treeDictionary, dictionary);
         }
     }//GEN-LAST:event_jMenuItemOpenDictionaryActionPerformed
 
@@ -299,18 +330,39 @@ public class Window extends javax.swing.JFrame {
             }
             int[] dictionaryLength = new int[1];
             dictionary = createWordsArray(dictionary, "dictionary/Dictionary", dictionaryLength);
+            treeDictionary = addWordsToTree(treeDictionary, dictionary);
         }
     }//GEN-LAST:event_jMenuItemAddDictionaryActionPerformed
 
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
         Object source = evt.getSource();
         if (settingsButton == source) {
-            String n_gramInformation = JOptionPane.showInputDialog("Enter the number of n_gram:");
-            if (n_gramInformation != null) {
-                rankOfN_gram = Integer.parseInt(n_gramInformation);
-            }
+            SettingsWindow settingWindow = new SettingsWindow();
+            settingWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            settingWindow.setVisible(true);
+            rankOfN_gram = settingWindow.getRankOfN_gram();
         }
     }//GEN-LAST:event_settingsButtonActionPerformed
+
+    private void statsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statsButtonActionPerformed
+        Object source = evt.getSource();
+        if (statsButton == source) {
+            StatsWindow statsWindow = new StatsWindow();
+            statsWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            statsWindow.setVisible(true);
+        }
+
+    }//GEN-LAST:event_statsButtonActionPerformed
+
+    private void jMenuItemNewWordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewWordsActionPerformed
+     Object source = evt.getSource();
+        if (jMenuItemNewWords == source) {
+            DictionaryWindow dictionaryWindow = new DictionaryWindow();
+            dictionaryWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            dictionaryWindow.setVisible(true);
+            DictionaryWindow.setNewWords(newWords);
+        }
+    }//GEN-LAST:event_jMenuItemNewWordsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,11 +406,13 @@ public class Window extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemAboutProgram;
     private javax.swing.JMenuItem jMenuItemAdd;
     private javax.swing.JMenuItem jMenuItemAddDictionary;
     private javax.swing.JMenuItem jMenuItemAuthor;
+    private javax.swing.JMenuItem jMenuItemNewWords;
     private javax.swing.JMenuItem jMenuItemOpen;
     private javax.swing.JMenuItem jMenuItemOpenDictionary;
     private javax.swing.JScrollPane jScrollPane1;
