@@ -30,7 +30,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTextFieldRankOfN_gram" min="-2" pref="60" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="205" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="201" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jButtonQuit" min="-2" pref="60" max="-2" attributes="0"/>
@@ -63,7 +63,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Rz&#x105;d n-gramu:"/>
+        <Property name="text" type="java.lang.String" value="Rank of n-gram"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldRankOfN_gram">

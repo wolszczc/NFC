@@ -12,9 +12,12 @@ import container.Container;
  * @author cezary
  */
 public class TextGenerator {
-        public static NGramContainer[] createNGram(NGramContainer[] n_gram, Container[] con, int rankOfN_gram) {/*tworzy n_gram*/
+
+    public static NGramContainer[] createNGram(NGramContainer[] n_gram, Container[] con, int rankOfN_gram) {/*tworzy n_gram*/
+
         int tabSize = 10;
         int i = 0;
+        String tmp = "";
         n_gram = new NGramContainer[tabSize];
         try {
             while (con[i + rankOfN_gram].getWord() != null) {
@@ -27,11 +30,13 @@ public class TextGenerator {
                 }
                 n_gram[i] = new NGramContainer(rankOfN_gram);
                 for (int j = 0; j < rankOfN_gram; j++) {
-                    n_gram[i].setPrefiks(con[i + j].getWord(), j);
+                    tmp = tmp + con[i + j].getWord() + " ";
                 }
+                n_gram[i].setPrefiks(tmp);
+                tmp = "";
                 n_gram[i].setSufiks(con[i + rankOfN_gram].getWord());
                 n_gram[i].setIndex(i);
-                System.out.println(n_gram[i].getSufiks());
+//                System.out.println(n_gram[i].getSufiks());
                 i++;
 
             }

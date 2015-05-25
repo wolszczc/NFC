@@ -37,7 +37,7 @@ public class SettingsWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Rząd n-gramu:");
+        jLabel1.setText("Rank of n-gram");
 
         jTextFieldRankOfN_gram.setText("2");
 
@@ -66,7 +66,7 @@ public class SettingsWindow extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldRankOfN_gram, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 205, Short.MAX_VALUE))
+                        .addGap(0, 201, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonQuit, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -103,7 +103,9 @@ public class SettingsWindow extends javax.swing.JFrame {
             String tmp = jTextFieldRankOfN_gram.getText();
             if (tmp != null) {
                 rankOfN_gram = Integer.parseInt(tmp);
+                Window.setRankOfN_gram(rankOfN_gram);
             }
+            dispose();
         }
     }//GEN-LAST:event_jButtonOkActionPerformed
 

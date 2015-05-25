@@ -11,4 +11,8 @@ package generator;
  */
 public class StatsGenerator {
     
+    public void createProbabilityOfPrefiks(NGramContainer n_gram, int lengthOfArray){
+        double probability = n_gram.getPrefiksCounts()/lengthOfArray;
+        /*do dopracowania*/
+    }
 }

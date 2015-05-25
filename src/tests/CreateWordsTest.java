@@ -34,9 +34,14 @@ public class CreateWordsTest {
 
         tree = addNGramToTree(tree, n_gram, 2);
         System.out.println(tree);
-        while (n_gram[i].getSufiks() != null) {
-            System.out.println(n_gram[i].getPrefiksCounts());
-            i++;
+        try {
+            while ((n_gram[i].getSufiks() != null) && (n_gram[i].getPrefiksCounts()>1)) {
+//                System.out.println(n_gram[i].getPrefiks() + " " + n_gram[i].getSufiksCounts());
+//                System.out.println(Arrays.toString(n_gram[i].getPointerOnSufiks()));
+                i++;
+            }
+        } catch (NullPointerException npe) {
+
         }
     }
 

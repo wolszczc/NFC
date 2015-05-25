@@ -9,9 +9,9 @@ package generator;
  *
  * @author wolszczc
  */
-public class NGramContainer {
+public class NGramContainer implements Comparable<NGramContainer> {
 
-    private String[] prefiks; /*tablica prefiksów*/
+    private String prefiks; /*tablica prefiksów*/
 
     private String sufiks; /*sufiksy*/
 
@@ -21,7 +21,9 @@ public class NGramContainer {
 
     private int sufiksCounts; /*zliczenia sufiksów*/
     
-    private int[] pointerOnSufiks;  /*wskażnik na sufiks*/
+    private int pointerOnPrefiks; /*wskaźnik na prefiks*/
+
+    private int pointerOnSufiks;  /*wskażnik na sufiks*/
 
     private double probabilityOfPrefiks; /*prawdopodobieństwo wystąpienia prefiksu*/
 
@@ -31,23 +33,16 @@ public class NGramContainer {
 
 
     public NGramContainer(int lengthPrefiksArray) {
-        prefiks = new String[lengthPrefiksArray];
+        prefiks = null;
         sufiks = null;
         index = 0;
         prefiksCounts = 1;
         sufiksCounts = 1;
-        pointerOnSufiks = null;
+        pointerOnSufiks = 0;
+        pointerOnPrefiks = 0;
         probabilityOfPrefiks = 0;
         probabilityOfSufiks = 0;
         probabilityOfN_gram = 0;
-    }
-
-    public String[] getPrefiks() {
-        return prefiks;
-    }
-
-    public void setPrefiks(String prefiks, int numberOfArray) {
-        this.prefiks[numberOfArray] = prefiks;
     }
 
     public String getSufiks() {
@@ -105,10 +100,73 @@ public class NGramContainer {
     public void setProbabilityOfN_gram(double probabilityOfN_gram) {
         this.probabilityOfN_gram = probabilityOfN_gram;
     }
-    
-    @Override
-    public String toString(){
-       return "" + prefiksCounts; 
+
+    public int getPointerOnPrefiks() {
+        return pointerOnPrefiks;
     }
 
+    public void setPointerOnPrefiks(int pointerOnPrefiks) {
+        this.pointerOnPrefiks = pointerOnPrefiks;
+    }
+
+    public int getPointerOnSufiks() {
+        return pointerOnSufiks;
+    }
+
+    public void setPointerOnSufiks(int pointerOnSufiks) {
+        this.pointerOnSufiks = pointerOnSufiks;
+    }
+
+
+
+    public String getPrefiks() {
+        return prefiks;
+    }
+
+    public void setPrefiks(String prefix) {
+        this.prefiks = prefix;
+    }
+
+    @Override
+    public String toString() {
+        return "" + prefiksCounts;
+    }
+
+//    public void reallocNGram(int tabSize) {
+//        int[] b = new int[tabSize];
+//        b = pointerOnSufiks.clone();
+//        tabSize *= 2;
+//        pointerOnSufiks = new int[tabSize];
+//        System.arraycopy(b, 0, pointerOnSufiks, 0, tabSize / 2);
+//    }
+    
+    @Override
+    public int compareTo(NGramContainer n) {
+        int cmp;
+        cmp = this.prefiks.compareTo(n.prefiks);
+        if (cmp < 0 || cmp > 0) { //rózne prefiksy
+            return cmp;
+        } else {
+            if (this != n) {
+                this.prefiksCounts++;
+                n.prefiksCounts++;
+                if(n.prefiksCounts > pointerOnPrefiks)
+                    pointerOnPrefiks = n.index;
+            }
+            cmp = this.sufiks.compareTo(n.sufiks);
+            if (cmp < 0 || cmp > 0) {
+                return cmp;
+            } else {
+                if (this != n) {
+                    n.sufiksCounts++;
+                    this.sufiksCounts++;
+                    if(n.sufiksCounts > pointerOnSufiks){
+                        pointerOnSufiks = n.index;
+                    }
+                }
+                return cmp;
+            }
+        }
+
+    }
 }
