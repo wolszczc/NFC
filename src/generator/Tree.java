@@ -47,7 +47,7 @@ public class Tree {
         int i = 0;
         try {
             while (n_gram[i].getSufiks() != null) {
-                tree.add(n_gram[i].getPrefiks());
+                tree.add(n_gram[i]);
                 i++;
             }
         } catch (NullPointerException npe) {

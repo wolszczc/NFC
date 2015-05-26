@@ -20,7 +20,7 @@ public class NGramContainer implements Comparable<NGramContainer> {
     private int prefiksCounts; /*zliczenia prefiksów*/
 
     private int sufiksCounts; /*zliczenia sufiksów*/
-    
+
     private int pointerOnPrefiks; /*wskaźnik na prefiks*/
 
     private int pointerOnSufiks;  /*wskażnik na sufiks*/
@@ -44,6 +44,8 @@ public class NGramContainer implements Comparable<NGramContainer> {
         probabilityOfSufiks = 0;
         probabilityOfN_gram = 0;
     }
+
+
 
     public String getSufiks() {
         return sufiks;
@@ -117,8 +119,6 @@ public class NGramContainer implements Comparable<NGramContainer> {
         this.pointerOnSufiks = pointerOnSufiks;
     }
 
-
-
     public String getPrefiks() {
         return prefiks;
     }
@@ -132,14 +132,6 @@ public class NGramContainer implements Comparable<NGramContainer> {
         return "" + prefiksCounts;
     }
 
-//    public void reallocNGram(int tabSize) {
-//        int[] b = new int[tabSize];
-//        b = pointerOnSufiks.clone();
-//        tabSize *= 2;
-//        pointerOnSufiks = new int[tabSize];
-//        System.arraycopy(b, 0, pointerOnSufiks, 0, tabSize / 2);
-//    }
-    
     @Override
     public int compareTo(NGramContainer n) {
         int cmp;
@@ -150,8 +142,9 @@ public class NGramContainer implements Comparable<NGramContainer> {
             if (this != n) {
                 this.prefiksCounts++;
                 n.prefiksCounts++;
-                if(n.prefiksCounts > pointerOnPrefiks)
+                if (n.prefiksCounts > pointerOnPrefiks) {
                     pointerOnPrefiks = n.index;
+                }
             }
             cmp = this.sufiks.compareTo(n.sufiks);
             if (cmp < 0 || cmp > 0) {
@@ -160,7 +153,7 @@ public class NGramContainer implements Comparable<NGramContainer> {
                 if (this != n) {
                     n.sufiksCounts++;
                     this.sufiksCounts++;
-                    if(n.sufiksCounts > pointerOnSufiks){
+                    if (n.sufiksCounts > pointerOnSufiks) {
                         pointerOnSufiks = n.index;
                     }
                 }

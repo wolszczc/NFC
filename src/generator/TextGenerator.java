@@ -6,6 +6,7 @@
 package generator;
 
 import container.Container;
+import java.util.TreeSet;
 
 /**
  *
@@ -46,4 +47,32 @@ public class TextGenerator {
 
         return n_gram;
     }
+/*    
+    public static String createAnswer(TreeSet tree, String wordsIn, int rankOfNgram){
+        String[] splitWords;
+        String nGramWords = "";
+        String newWords = "";
+        int i = 0;
+        splitWords = wordsIn.split(" ");
+        for(int j = 0; j< rankOfNgram; j++){
+            nGramWords = nGramWords + splitWords[j];
+        }
+        if(tree.contains(nGramWords)){
+            to tu !
+        }
+        
+        try {
+            for (String s : splitWords) {
+                if (!tree.contains(s)) {
+                    newWords = newWords + "\n" + s;
+                }
+                i++;
+            }
+        } catch (NullPointerException npe) {
+
+        }
+        
+        return null;
+    }
+*/
 }
