@@ -14,7 +14,7 @@ public class Tree {
         int i = 0;
         try {
             while (con[i].getWord() != null) {
-                tree.add(con[i].getWord());
+                tree.add(con[i]);
                 i++;
             }
         } catch (NullPointerException npe) {
@@ -52,6 +52,8 @@ public class Tree {
             }
         } catch (NullPointerException npe) {
 
+        } catch(ArrayIndexOutOfBoundsException aioobe){
+            
         }
         return tree;
     }

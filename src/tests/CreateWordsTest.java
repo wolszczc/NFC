@@ -35,16 +35,17 @@ public class CreateWordsTest {
         n_gram = createNGram(n_gram, con, 2);
         
         tree = addNGramToTree(tree, n_gram, 2);
-//        stats.findMostCommonNGrams(n_gram);
+       stats.findMostCommonNGrams(n_gram);
+        System.out.println(stats.createStatsArray(n_gram));
         
-//        for(int t = 0;t<=4; t++){
-//            System.out.println(stats.getPointer()[t]);
-//        }
+        for(int t = 0;t<=4; t++){
+            System.out.println(stats.getPointer()[t]);
+        }
         
 //        System.out.println(tree);
         try {
-            while ((n_gram[i].getSufiks() != null) && (n_gram[i].getPrefiksCounts()>1)) {
-                System.out.println(n_gram[i].getPrefiks() + " " + n_gram[i].getSufiksCounts());
+            while ((n_gram[i].getSufiks() != null) ) {
+ //               System.out.println(n_gram[i].getPrefiks() + " " + n_gram[i].getSufiksCounts());
 //                System.out.println(Arrays.toString(n_gram[i].getPointerOnSufiks()));
                 i++;
             }

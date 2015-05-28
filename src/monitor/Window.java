@@ -15,15 +15,18 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import static container.WriteData.*;
 import generator.NGramContainer;
+import generator.StatsGenerator;
 import generator.TextGenerator;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import static generator.TextGenerator.*;
+import static generator.Tree.addNGramToTree;
 import static generator.Tree.addWordsToTree;
 import static generator.Tree.checkWordsInDictionary;
 import java.awt.Font;
 import java.util.Random;
 import java.util.TreeSet;
+import javax.swing.JButton;
 
 /**
  *
@@ -32,9 +35,13 @@ import java.util.TreeSet;
 public class Window extends javax.swing.JFrame {
 
     private static int[] arrayLength = new int[1];
+    private static int[] indeksWordsInSettingsWindow = new int[5];
+    private static int[] indeksWordsInSettingsWindow2 = new int[5];
     private static String wordsIn = "";
     private static String wordsInInfo = "";
     private static String newWords = "";
+    private static String wordsInSettingsWindow = "";
+    private static String wordsInSettingsWindow2 = "";
     private static Container[] con;
     private static Container[] dictionary;
     private static TextGenerator[] textGen;
@@ -42,6 +49,7 @@ public class Window extends javax.swing.JFrame {
     public static TreeSet treeSet = null;
     public static TreeSet treeDictionary = null;
     private static int rankOfN_gram = 2;
+    StatsWindow statsWindow;
 
     /**
      * Creates new form Window
@@ -282,10 +290,13 @@ public class Window extends javax.swing.JFrame {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         Object source = evt.getSource();
         if (source == sendButton) {
+            StatsGenerator stats = new StatsGenerator();
+
             Random rand = new Random();
             Font font1 = new Font("Verdana", Font.BOLD, 12);
             String tempWords;
             Date date = new Date();
+
             jTextPaneOut.setFont(font1);
             tempWords = " " + jTextAreaIn.getText();
             newWords = newWords + checkWordsInDictionary(treeDictionary, tempWords);
@@ -293,13 +304,42 @@ public class Window extends javax.swing.JFrame {
             wordsIn = wordsIn + "\n" + "user:\n" + date + "\n" + jTextAreaIn.getText() + "\n";
             jTextAreaIn.setText("");
             con = createWordsArray(con, "base/Base", arrayLength);
-            n_gram = createNGram(n_gram, con, rankOfN_gram);
-            int randInt = rand.nextInt(arrayLength[0] - rankOfN_gram);
-            while (randInt < 0) {
-                randInt = rand.nextInt(arrayLength[0] - rankOfN_gram);
+
+            try {
+                n_gram = createNGram(n_gram, con, rankOfN_gram);
+            } catch (ArrayIndexOutOfBoundsException aioobe) {
+
             }
-            wordsIn = wordsIn + "\n" + "computer:\n" + date + "\n" + n_gram[randInt].getPrefiks() + "\n";
-            jTextPaneOut.setText(wordsIn);
+            treeSet = addNGramToTree(treeSet, n_gram, rankOfN_gram);
+
+            stats.findMostCommonNGrams(n_gram); /*tworzy staty*/
+
+            stats.findMostCommonSufiks(n_gram); /*tworzy staty*/
+
+            wordsInSettingsWindow = stats.createStatsArray(n_gram);
+            wordsInSettingsWindow2 = stats.createStatsArray2(n_gram);
+            for (int i = 0; i < 5; i++) {
+                indeksWordsInSettingsWindow[i] = stats.getPointer()[i];
+                indeksWordsInSettingsWindow2[i] = stats.getPointerSufiks()[i];
+                System.out.println(indeksWordsInSettingsWindow[i]);
+            }
+            int randInt = 0;
+            try {
+                randInt = rand.nextInt(arrayLength[0] - rankOfN_gram);
+                while (randInt < 0) {
+                    randInt = rand.nextInt(arrayLength[0] - rankOfN_gram);
+                }
+            } catch (IllegalArgumentException iae) {
+                randInt = 0;
+            }
+
+            try {
+                wordsIn = wordsIn + "\n" + "computer:\n" + date + "\n" + n_gram[randInt].getPrefiks() + "\n";
+                jTextPaneOut.setText(wordsIn);
+            } catch (NullPointerException npe) {
+
+            }
+            //      StatsWindow.setjButtonRefresh(sendButton);
         }
     }//GEN-LAST:event_sendButtonActionPerformed
 
@@ -355,7 +395,7 @@ public class Window extends javax.swing.JFrame {
     private void statsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statsButtonActionPerformed
         Object source = evt.getSource();
         if (statsButton == source) {
-            StatsWindow statsWindow = new StatsWindow();
+            statsWindow = new StatsWindow();
             statsWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             statsWindow.setVisible(true);
         }
@@ -418,8 +458,55 @@ public class Window extends javax.swing.JFrame {
     public static void setRankOfN_gram(int rankOfN_gram) {
         Window.rankOfN_gram = rankOfN_gram;
     }
-    
-    
+
+    public static String getWordsInSettingsWindow() {
+        return wordsInSettingsWindow;
+    }
+
+    public static void setWordsInSettingsWindow(String wordsInSettingsWindow) {
+        Window.wordsInSettingsWindow = wordsInSettingsWindow;
+    }
+
+    public static int[] getIndeksWordsInSettingsWindow() {
+        return indeksWordsInSettingsWindow;
+    }
+
+    public static void setIndeksWordsInSettingsWindow(int[] indeksWordsInSettingsWindow) {
+        Window.indeksWordsInSettingsWindow = indeksWordsInSettingsWindow;
+    }
+
+    public static int[] getIndeksWordsInSettingsWindow2() {
+        return indeksWordsInSettingsWindow2;
+    }
+
+    public static void setIndeksWordsInSettingsWindow2(int[] indeksWordsInSettingsWindow2) {
+        Window.indeksWordsInSettingsWindow2 = indeksWordsInSettingsWindow2;
+    }
+
+    public static String getWordsInSettingsWindow2() {
+        return wordsInSettingsWindow2;
+    }
+
+    public static void setWordsInSettingsWindow2(String wordsInSettingsWindow2) {
+        Window.wordsInSettingsWindow2 = wordsInSettingsWindow2;
+    }
+
+    public static int[] getArrayLength() {
+        return arrayLength;
+    }
+
+    public static void setArrayLength(int[] arrayLength) {
+        Window.arrayLength = arrayLength;
+    }
+
+    public JButton getSendButton() {
+        return sendButton;
+    }
+
+    public void setSendButton(JButton sendButton) {
+        this.sendButton = sendButton;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;

@@ -5,18 +5,55 @@
  */
 package monitor;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.JButton;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 /**
  *
- * @author HP
+ * @author wolszczc
  */
 public class StatsWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form OptionsWindow
-     */
+    private String nGramLabel;
+    private int[] nGramCounts;
+
+    public String getnGramLabel() {
+        return nGramLabel;
+    }
+
+    public void setnGramLabel(String nGramLabel) {
+        this.nGramLabel = nGramLabel;
+    }
+
+    public int[] getnGramCounts() {
+        return nGramCounts;
+    }
+
+    public void setnGramCounts(int[] nGramCounts) {
+        this.nGramCounts = nGramCounts;
+    }
+
     public StatsWindow() {
         initComponents();
+
     }
+
+    public JButton getjButtonRefresh() {
+        return jButtonRefresh;
+    }
+
+    public void setjButtonRefresh(JButton jButtonRefresh) {
+        this.jButtonRefresh = jButtonRefresh;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,45 +67,18 @@ public class StatsWindow extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jButtonQuit = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
+        jButtonRefresh = new javax.swing.JButton();
+        jPanelDiagram = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaNGramWords = new javax.swing.JTextArea();
+        jPanelDiagram2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextAreaSufiksWords = new javax.swing.JTextArea();
 
         jScrollPane1.setViewportView(jTree1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("The most common sentence:");
-
-        jTextField1.setText("none");
-
-        jLabel2.setText("Number of:");
-
-        jTextField3.setText("0");
-
-        jLabel3.setText("The most common n-gram:");
-
-        jTextField2.setText("none");
-
-        jLabel4.setText("Number of:");
-
-        jTextField4.setText("0");
-
-        jLabel5.setText("The probability of n-gram:");
-
-        jTextField5.setText("0");
 
         jButtonQuit.setText("Quit");
         jButtonQuit.addActionListener(new java.awt.event.ActionListener() {
@@ -77,11 +87,26 @@ public class StatsWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Refresh");
+        jButtonRefresh.setText("Refresh");
+        jButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefreshActionPerformed(evt);
+            }
+        });
 
-        jLabel6.setText("The probability of sentence:");
+        jPanelDiagram.setBackground(new java.awt.Color(153, 153, 153));
+        jPanelDiagram.setLayout(new java.awt.BorderLayout());
 
-        jTextField6.setText("0");
+        jTextAreaNGramWords.setColumns(20);
+        jTextAreaNGramWords.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaNGramWords);
+
+        jPanelDiagram2.setBackground(new java.awt.Color(153, 153, 153));
+        jPanelDiagram2.setLayout(new java.awt.BorderLayout());
+
+        jTextAreaSufiksWords.setColumns(20);
+        jTextAreaSufiksWords.setRows(5);
+        jScrollPane3.setViewportView(jTextAreaSufiksWords);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,69 +115,35 @@ public class StatsWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonQuit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addComponent(jSeparator1)
-                    .addComponent(jTextField2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 586, Short.MAX_VALUE)
+                        .addComponent(jButtonRefresh))
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanelDiagram, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 107, Short.MAX_VALUE)))
+                            .addComponent(jPanelDiagram2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelDiagram, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelDiagram2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonQuit)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonRefresh))
                 .addContainerGap())
         );
 
@@ -165,6 +156,47 @@ public class StatsWindow extends javax.swing.JFrame {
             dispose();
         }
     }//GEN-LAST:event_jButtonQuitActionPerformed
+
+    private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
+          
+        DefaultCategoryDataset dateset = new DefaultCategoryDataset();
+        dateset.setValue(Window.getIndeksWordsInSettingsWindow()[0], "", "1");
+        dateset.setValue(Window.getIndeksWordsInSettingsWindow()[1], "", "2");
+        dateset.setValue(Window.getIndeksWordsInSettingsWindow()[2], "", "3");
+        dateset.setValue(Window.getIndeksWordsInSettingsWindow()[3], "", "4");
+        dateset.setValue(Window.getIndeksWordsInSettingsWindow()[4], "", "5");
+
+        DefaultCategoryDataset dateset2 = new DefaultCategoryDataset();
+        dateset2.setValue(Window.getIndeksWordsInSettingsWindow2()[0], "", "1");
+        dateset2.setValue(Window.getIndeksWordsInSettingsWindow2()[1], "", "2");
+        dateset2.setValue(Window.getIndeksWordsInSettingsWindow2()[2], "", "3");
+        dateset2.setValue(Window.getIndeksWordsInSettingsWindow2()[3], "", "4");
+        dateset2.setValue(Window.getIndeksWordsInSettingsWindow2()[4], "", "5");
+
+        JFreeChart chart = ChartFactory.createBarChart("Prefiks counts diagram", "", "", dateset, PlotOrientation.HORIZONTAL, false, false, false);
+        CategoryPlot catPlot = chart.getCategoryPlot();
+        catPlot.setRangeGridlinePaint(Color.BLACK);
+
+        JFreeChart chart2 = ChartFactory.createBarChart("Sufiks counts diagram", "", "", dateset2, PlotOrientation.HORIZONTAL, false, false, false);
+        CategoryPlot catPlot2 = chart2.getCategoryPlot();
+        catPlot2.setRangeGridlinePaint(Color.BLACK);
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        jPanelDiagram.removeAll();
+        jPanelDiagram.add(chartPanel, BorderLayout.CENTER);
+        jPanelDiagram.validate();
+
+        ChartPanel chartPanel2 = new ChartPanel(chart2);
+        jPanelDiagram2.removeAll();
+        jPanelDiagram2.add(chartPanel2, BorderLayout.CENTER);
+        jPanelDiagram2.validate();
+
+        jTextAreaNGramWords.setText(Window.getWordsInSettingsWindow());
+
+        jTextAreaSufiksWords.setText(Window.getWordsInSettingsWindow2());
+
+
+    }//GEN-LAST:event_jButtonRefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,24 +234,18 @@ public class StatsWindow extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonQuit;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton jButtonRefresh;
+    private javax.swing.JPanel jPanelDiagram;
+    private javax.swing.JPanel jPanelDiagram2;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextAreaNGramWords;
+    private javax.swing.JTextArea jTextAreaSufiksWords;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }
