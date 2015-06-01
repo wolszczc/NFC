@@ -248,11 +248,16 @@ public class Window extends javax.swing.JFrame {
             if (fileChoicer.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 File file = fileChoicer.getSelectedFile();
                 String tmp;
-                tmp = readFile(file.getAbsolutePath());
-                try {
-                    saveFileToBase("base/Base", file, tmp, "base");
-                } catch (IOException ex) {
-                    Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                if (file.isFile()) {
+
+                    tmp = readFile(file.getAbsolutePath());
+                    try {
+                        saveFileToBase("base/Base", file, tmp, "base");
+                    } catch (IOException ex) {
+                        Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    System.err.println("File is not exist");
                 }
             }
             con = createWordsArray(con, "base/Base", arrayLength);
@@ -267,11 +272,15 @@ public class Window extends javax.swing.JFrame {
             if (fileChoicer.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 File file = fileChoicer.getSelectedFile();
                 String tmp;
-                tmp = readFile(file.getAbsolutePath());
-                try {
-                    addFileToBase("base/Base", file, tmp, "base");
-                } catch (IOException ex) {
-                    Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                if (file.isFile()) {
+                    tmp = readFile(file.getAbsolutePath());
+                    try {
+                        addFileToBase("base/Base", file, tmp, "base");
+                    } catch (IOException ex) {
+                        Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    System.err.println("File is not exist");
                 }
             }
             con = createWordsArray(con, "base/Base", arrayLength);
@@ -350,12 +359,16 @@ public class Window extends javax.swing.JFrame {
             if (fileChoicer.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 File file = fileChoicer.getSelectedFile();
                 String tmp;
-                tmp = readFile(file.getAbsolutePath());
-                try {
-                    saveFileToBase("dictionary/Dictionary", file, tmp, "dictionary");
-                } catch (IOException ex) {
-                    Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                if (file.isFile()) {
+                    tmp = readFile(file.getAbsolutePath());
+                    try {
+                        saveFileToBase("dictionary/Dictionary", file, tmp, "dictionary");
+                    } catch (IOException ex) {
+                        Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+            } else {
+                System.err.println("File is not exist");
             }
             int[] dictionaryLength = new int[1];
             dictionary = createWordsArray(dictionary, "dictionary/Dictionary", dictionaryLength);
@@ -370,12 +383,16 @@ public class Window extends javax.swing.JFrame {
             if (fileChoicer.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 File file = fileChoicer.getSelectedFile();
                 String tmp;
-                tmp = readFile(file.getAbsolutePath());
-                try {
-                    addFileToBase("dictionary/Dictionary", file, tmp, "dictionary");
-                } catch (IOException ex) {
-                    Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                if (file.isFile()) {
+                    tmp = readFile(file.getAbsolutePath());
+                    try {
+                        addFileToBase("dictionary/Dictionary", file, tmp, "dictionary");
+                    } catch (IOException ex) {
+                        Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+            } else {
+                System.err.println("File is not exist");
             }
             int[] dictionaryLength = new int[1];
             dictionary = createWordsArray(dictionary, "dictionary/Dictionary", dictionaryLength);

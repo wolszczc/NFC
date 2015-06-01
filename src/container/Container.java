@@ -58,6 +58,7 @@ public class Container {
     }
 
     public static Container[] createWordsArray(Container[] con, String nameFile, int[] arrayLength) {/*tworzy tablice słów*/
+
         int tabSize = 10;
         int i = 0;
         con = new Container[tabSize];
@@ -97,4 +98,5 @@ public class Container {
         return con;
 
     }
+
 }
