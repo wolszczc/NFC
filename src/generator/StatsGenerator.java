@@ -69,7 +69,8 @@ public class StatsGenerator {
     }
 
     public void findMostCommonNGrams(NGramContainer[] n_gram) {
-        int tmp = 0;
+        int tmp;
+        String[] tmpString = new String[4];
         int i = 0;
         int j = 0;
         try {
@@ -84,15 +85,15 @@ public class StatsGenerator {
 
         } catch (NullPointerException npe) {
 
-        }catch(ArrayIndexOutOfBoundsException aioobe){
-            
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+
         }
-        
+        tmpString[0] = n_gram[pointerToNGram[0]].getPrefiks();
         j = 0;
         try {
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getPrefiksCounts();
-                if (pointer[1] < tmp && tmp != pointer[0]) {
+                if (pointer[1] <= tmp && tmpString[0].equals(n_gram[j].getPrefiks()) == false) {
                     pointer[1] = tmp;
                     pointerToNGram[1] = n_gram[j].getIndex();
                 }
@@ -100,14 +101,17 @@ public class StatsGenerator {
             }
         } catch (NullPointerException npe) {
 
-        }catch(ArrayIndexOutOfBoundsException aioobe){
-            
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+
         }
+        tmpString[1] = n_gram[pointerToNGram[1]].getPrefiks();
         j = 0;
         try {
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getPrefiksCounts();
-                if (pointer[2] < tmp && tmp != pointer[1] && tmp != pointer[0]) {
+                if (pointer[2] <= tmp && 
+                        tmpString[0].equals(n_gram[j].getPrefiks()) == false && 
+                        tmpString[1].equals(n_gram[j].getPrefiks()) == false) {
                     pointer[2] = tmp;
                     pointerToNGram[2] = n_gram[j].getIndex();
                 }
@@ -115,43 +119,53 @@ public class StatsGenerator {
             }
         } catch (NullPointerException npe) {
 
-        }catch(ArrayIndexOutOfBoundsException aioobe){
-            
-        }
-        j = 0;
-        try {
-            while (n_gram[j].getPrefiks() != null) {
-                tmp = n_gram[j].getPrefiksCounts();
-                if (pointer[3] < tmp && tmp != pointer[2] && tmp != pointer[1] && tmp != pointer[0]) {
-                    pointer[3] = tmp;
-                    pointerToNGram[2] = n_gram[j].getIndex();
-                }
-                j++;
-            }
-        } catch (NullPointerException npe) {
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
 
-        }catch(ArrayIndexOutOfBoundsException aioobe){
-            
         }
+        tmpString[2] = n_gram[pointerToNGram[2]].getPrefiks();
         j = 0;
         try {
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getPrefiksCounts();
-                if (pointer[4] < tmp && tmp != pointer[3] && tmp != pointer[2] && tmp != pointer[1] && tmp != pointer[0]) {
-                    pointer[4] = tmp;
+                if (pointer[3] <= tmp  && 
+                        tmpString[0].equals(n_gram[j].getPrefiks()) == false && 
+                        tmpString[1].equals(n_gram[j].getPrefiks()) == false && 
+                        tmpString[2].equals(n_gram[j].getPrefiks()) == false) {
+                    pointer[3] = tmp;
                     pointerToNGram[3] = n_gram[j].getIndex();
                 }
                 j++;
             }
         } catch (NullPointerException npe) {
 
-        }catch(ArrayIndexOutOfBoundsException aioobe){
-            
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+
+        }
+        tmpString[3] = n_gram[pointerToNGram[3]].getPrefiks();
+        j = 0;
+        try {
+            while (n_gram[j].getPrefiks() != null) {
+                tmp = n_gram[j].getPrefiksCounts();
+                if (pointer[4] <= tmp && 
+                        tmpString[0].equals(n_gram[j].getPrefiks()) == false && 
+                        tmpString[1].equals(n_gram[j].getPrefiks()) == false && 
+                        tmpString[2].equals(n_gram[j].getPrefiks()) == false && 
+                        tmpString[3].equals(n_gram[j].getPrefiks()) == false) {
+                    pointer[4] = tmp;
+                    pointerToNGram[4] = n_gram[j].getIndex();
+                }
+                j++;
+            }
+        } catch (NullPointerException npe) {
+
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+
         }
     }
 
     public void findMostCommonSufiks(NGramContainer[] n_gram) {
-        int tmp = 0;
+        int tmp;
+        String[] tmpString = new String[4];
         int i = 0;
         int j = 0;
         try {
@@ -166,14 +180,15 @@ public class StatsGenerator {
 
         } catch (NullPointerException npe) {
 
-        }catch(ArrayIndexOutOfBoundsException aioobe){
-            
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+
         }
+        tmpString[0] = n_gram[pointerToSufiks[0]].getSufiks();
         j = 0;
         try {
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getSufiksCounts();
-                if (pointerSufiks[1] < tmp && tmp != pointerSufiks[0]) {
+                if (pointerSufiks[1] <= tmp && tmpString[0].equals(n_gram[j].getSufiks()) == false) {
                     pointerSufiks[1] = tmp;
                     pointerToSufiks[1] = n_gram[j].getIndex();
                 }
@@ -181,14 +196,17 @@ public class StatsGenerator {
             }
         } catch (NullPointerException npe) {
 
-        }catch(ArrayIndexOutOfBoundsException aioobe){
-            
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+
         }
+        tmpString[1] = n_gram[pointerToSufiks[1]].getSufiks();
         j = 0;
         try {
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getSufiksCounts();
-                if (pointerSufiks[2] < tmp && tmp != pointerSufiks[1] && tmp != pointerSufiks[0]) {
+                if (pointerSufiks[2] <= tmp  && 
+                        tmpString[0].equals(n_gram[j].getSufiks()) == false && 
+                        tmpString[1].equals(n_gram[j].getSufiks()) == false) {
                     pointerSufiks[2] = tmp;
                     pointerToSufiks[2] = n_gram[j].getIndex();
                 }
@@ -196,38 +214,47 @@ public class StatsGenerator {
             }
         } catch (NullPointerException npe) {
 
-        }catch(ArrayIndexOutOfBoundsException aioobe){
-            
-        }
-        j = 0;
-        try {
-            while (n_gram[j].getPrefiks() != null) {
-                tmp = n_gram[j].getSufiksCounts();
-                if (pointerSufiks[3] < tmp && tmp != pointerSufiks[2] && tmp != pointerSufiks[1] && tmp != pointerSufiks[0]) {
-                    pointerSufiks[3] = tmp;
-                    pointerToSufiks[2] = n_gram[j].getIndex();
-                }
-                j++;
-            }
-        } catch (NullPointerException npe) {
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
 
-        }catch(ArrayIndexOutOfBoundsException aioobe){
-            
         }
+        tmpString[2] = n_gram[pointerToSufiks[2]].getSufiks();
         j = 0;
         try {
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getSufiksCounts();
-                if (pointerSufiks[4] < tmp && tmp != pointerSufiks[3] && tmp != pointerSufiks[2] && tmp != pointerSufiks[1] && tmp != pointerSufiks[0]) {
-                    pointerSufiks[4] = tmp;
+                if (pointerSufiks[3] <= tmp  && 
+                        tmpString[0].equals(n_gram[j].getSufiks()) == false && 
+                        tmpString[1].equals(n_gram[j].getSufiks()) == false && 
+                        tmpString[2].equals(n_gram[j].getSufiks()) == false) {
+                    pointerSufiks[3] = tmp;
                     pointerToSufiks[3] = n_gram[j].getIndex();
                 }
                 j++;
             }
         } catch (NullPointerException npe) {
 
-        }catch(ArrayIndexOutOfBoundsException aioobe){
-            
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+
+        }
+        tmpString[3] = n_gram[pointerToSufiks[3]].getSufiks();
+        j = 0;
+        try {
+            while (n_gram[j].getPrefiks() != null) {
+                tmp = n_gram[j].getSufiksCounts();
+                if (pointerSufiks[4] <= tmp && 
+                        tmpString[0].equals(n_gram[j].getSufiks()) == false && 
+                        tmpString[1].equals(n_gram[j].getSufiks()) == false && 
+                        tmpString[2].equals(n_gram[j].getSufiks()) == false && 
+                        tmpString[3].equals(n_gram[j].getSufiks()) == false) {
+                    pointerSufiks[4] = tmp;
+                    pointerToSufiks[4] = n_gram[j].getIndex();
+                }
+                j++;
+            }
+        } catch (NullPointerException npe) {
+
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+
         }
     }
 
@@ -261,10 +288,10 @@ public class StatsGenerator {
 
         try {
             words = "1  " + n_gram[pointerToSufiks[0]].getSufiks() + "     " + String.format("%.5f", n_gram[pointerToSufiks[0]].getProbabilityOfSufiks()) + "\n2  "
-                    + n_gram[pointerToSufiks[1]].getSufiks() + "     " + String.format("%.5f", n_gram[pointerToSufiks[0]].getProbabilityOfSufiks()) + "\n3  "
-                    + n_gram[pointerToSufiks[2]].getSufiks() + "     " + String.format("%.5f", n_gram[pointerToSufiks[0]].getProbabilityOfSufiks()) + "\n4  "
-                    + n_gram[pointerToSufiks[3]].getSufiks() + "     " + String.format("%.5f", n_gram[pointerToSufiks[0]].getProbabilityOfSufiks()) + "\n5  "
-                    + n_gram[pointerToSufiks[4]].getSufiks() + "     " + String.format("%.5f", n_gram[pointerToSufiks[0]].getProbabilityOfSufiks());
+                    + n_gram[pointerToSufiks[1]].getSufiks() + "     " + String.format("%.5f", n_gram[pointerToSufiks[1]].getProbabilityOfSufiks()) + "\n3  "
+                    + n_gram[pointerToSufiks[2]].getSufiks() + "     " + String.format("%.5f", n_gram[pointerToSufiks[2]].getProbabilityOfSufiks()) + "\n4  "
+                    + n_gram[pointerToSufiks[3]].getSufiks() + "     " + String.format("%.5f", n_gram[pointerToSufiks[3]].getProbabilityOfSufiks()) + "\n5  "
+                    + n_gram[pointerToSufiks[4]].getSufiks() + "     " + String.format("%.5f", n_gram[pointerToSufiks[4]].getProbabilityOfSufiks());
         } catch (NullPointerException npe) {
 
         }

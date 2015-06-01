@@ -10,11 +10,12 @@ import java.util.TreeSet;
 public class Tree {
 
     public static TreeSet addWordsToTree(TreeSet tree, Container[] con) {
-        tree = new TreeSet<>();
+        tree = new TreeSet();
         int i = 0;
         try {
             while (con[i].getWord() != null) {
-                tree.add(con[i]);
+                tree.add(con[i].getWord());
+                System.out.println(con[i].getWord());
                 i++;
             }
         } catch (NullPointerException npe) {
