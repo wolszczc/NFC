@@ -88,9 +88,10 @@ public class StatsGenerator {
         } catch (ArrayIndexOutOfBoundsException aioobe) {
 
         }
-        tmpString[0] = n_gram[pointerToNGram[0]].getPrefiks();
         j = 0;
         try {
+            tmpString[0] = n_gram[pointerToNGram[0]].getPrefiks();
+            tmpString[0] = n_gram[pointerToNGram[0]].getPrefiks();
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getPrefiksCounts();
                 if (pointer[1] <= tmp && tmpString[0].equals(n_gram[j].getPrefiks()) == false) {
@@ -104,14 +105,14 @@ public class StatsGenerator {
         } catch (ArrayIndexOutOfBoundsException aioobe) {
 
         }
-        tmpString[1] = n_gram[pointerToNGram[1]].getPrefiks();
         j = 0;
         try {
+            tmpString[1] = n_gram[pointerToNGram[1]].getPrefiks();
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getPrefiksCounts();
-                if (pointer[2] <= tmp && 
-                        tmpString[0].equals(n_gram[j].getPrefiks()) == false && 
-                        tmpString[1].equals(n_gram[j].getPrefiks()) == false) {
+                if (pointer[2] <= tmp
+                        && tmpString[0].equals(n_gram[j].getPrefiks()) == false
+                        && tmpString[1].equals(n_gram[j].getPrefiks()) == false) {
                     pointer[2] = tmp;
                     pointerToNGram[2] = n_gram[j].getIndex();
                 }
@@ -122,15 +123,15 @@ public class StatsGenerator {
         } catch (ArrayIndexOutOfBoundsException aioobe) {
 
         }
-        tmpString[2] = n_gram[pointerToNGram[2]].getPrefiks();
         j = 0;
         try {
+            tmpString[2] = n_gram[pointerToNGram[2]].getPrefiks();
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getPrefiksCounts();
-                if (pointer[3] <= tmp  && 
-                        tmpString[0].equals(n_gram[j].getPrefiks()) == false && 
-                        tmpString[1].equals(n_gram[j].getPrefiks()) == false && 
-                        tmpString[2].equals(n_gram[j].getPrefiks()) == false) {
+                if (pointer[3] <= tmp
+                        && tmpString[0].equals(n_gram[j].getPrefiks()) == false
+                        && tmpString[1].equals(n_gram[j].getPrefiks()) == false
+                        && tmpString[2].equals(n_gram[j].getPrefiks()) == false) {
                     pointer[3] = tmp;
                     pointerToNGram[3] = n_gram[j].getIndex();
                 }
@@ -141,16 +142,16 @@ public class StatsGenerator {
         } catch (ArrayIndexOutOfBoundsException aioobe) {
 
         }
-        tmpString[3] = n_gram[pointerToNGram[3]].getPrefiks();
         j = 0;
         try {
+            tmpString[3] = n_gram[pointerToNGram[3]].getPrefiks();
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getPrefiksCounts();
-                if (pointer[4] <= tmp && 
-                        tmpString[0].equals(n_gram[j].getPrefiks()) == false && 
-                        tmpString[1].equals(n_gram[j].getPrefiks()) == false && 
-                        tmpString[2].equals(n_gram[j].getPrefiks()) == false && 
-                        tmpString[3].equals(n_gram[j].getPrefiks()) == false) {
+                if (pointer[4] <= tmp
+                        && tmpString[0].equals(n_gram[j].getPrefiks()) == false
+                        && tmpString[1].equals(n_gram[j].getPrefiks()) == false
+                        && tmpString[2].equals(n_gram[j].getPrefiks()) == false
+                        && tmpString[3].equals(n_gram[j].getPrefiks()) == false) {
                     pointer[4] = tmp;
                     pointerToNGram[4] = n_gram[j].getIndex();
                 }
@@ -183,9 +184,9 @@ public class StatsGenerator {
         } catch (ArrayIndexOutOfBoundsException aioobe) {
 
         }
-        tmpString[0] = n_gram[pointerToSufiks[0]].getSufiks();
         j = 0;
         try {
+            tmpString[0] = n_gram[pointerToSufiks[0]].getSufiks();
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getSufiksCounts();
                 if (pointerSufiks[1] <= tmp && tmpString[0].equals(n_gram[j].getSufiks()) == false) {
@@ -199,14 +200,14 @@ public class StatsGenerator {
         } catch (ArrayIndexOutOfBoundsException aioobe) {
 
         }
-        tmpString[1] = n_gram[pointerToSufiks[1]].getSufiks();
         j = 0;
         try {
+            tmpString[1] = n_gram[pointerToSufiks[1]].getSufiks();
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getSufiksCounts();
-                if (pointerSufiks[2] <= tmp  && 
-                        tmpString[0].equals(n_gram[j].getSufiks()) == false && 
-                        tmpString[1].equals(n_gram[j].getSufiks()) == false) {
+                if (pointerSufiks[2] <= tmp
+                        && tmpString[0].equals(n_gram[j].getSufiks()) == false
+                        && tmpString[1].equals(n_gram[j].getSufiks()) == false) {
                     pointerSufiks[2] = tmp;
                     pointerToSufiks[2] = n_gram[j].getIndex();
                 }
@@ -217,15 +218,15 @@ public class StatsGenerator {
         } catch (ArrayIndexOutOfBoundsException aioobe) {
 
         }
-        tmpString[2] = n_gram[pointerToSufiks[2]].getSufiks();
         j = 0;
         try {
+            tmpString[2] = n_gram[pointerToSufiks[2]].getSufiks();
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getSufiksCounts();
-                if (pointerSufiks[3] <= tmp  && 
-                        tmpString[0].equals(n_gram[j].getSufiks()) == false && 
-                        tmpString[1].equals(n_gram[j].getSufiks()) == false && 
-                        tmpString[2].equals(n_gram[j].getSufiks()) == false) {
+                if (pointerSufiks[3] <= tmp
+                        && tmpString[0].equals(n_gram[j].getSufiks()) == false
+                        && tmpString[1].equals(n_gram[j].getSufiks()) == false
+                        && tmpString[2].equals(n_gram[j].getSufiks()) == false) {
                     pointerSufiks[3] = tmp;
                     pointerToSufiks[3] = n_gram[j].getIndex();
                 }
@@ -236,16 +237,16 @@ public class StatsGenerator {
         } catch (ArrayIndexOutOfBoundsException aioobe) {
 
         }
-        tmpString[3] = n_gram[pointerToSufiks[3]].getSufiks();
         j = 0;
         try {
+            tmpString[3] = n_gram[pointerToSufiks[3]].getSufiks();
             while (n_gram[j].getPrefiks() != null) {
                 tmp = n_gram[j].getSufiksCounts();
-                if (pointerSufiks[4] <= tmp && 
-                        tmpString[0].equals(n_gram[j].getSufiks()) == false && 
-                        tmpString[1].equals(n_gram[j].getSufiks()) == false && 
-                        tmpString[2].equals(n_gram[j].getSufiks()) == false && 
-                        tmpString[3].equals(n_gram[j].getSufiks()) == false) {
+                if (pointerSufiks[4] <= tmp
+                        && tmpString[0].equals(n_gram[j].getSufiks()) == false
+                        && tmpString[1].equals(n_gram[j].getSufiks()) == false
+                        && tmpString[2].equals(n_gram[j].getSufiks()) == false
+                        && tmpString[3].equals(n_gram[j].getSufiks()) == false) {
                     pointerSufiks[4] = tmp;
                     pointerToSufiks[4] = n_gram[j].getIndex();
                 }
